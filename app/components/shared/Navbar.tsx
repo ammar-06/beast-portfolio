@@ -1,0 +1,158 @@
+"use client";
+import React, { useState } from "react";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { Menu, X } from "lucide-react"; 
+
+const Navbar = () => {
+  const { scrollY } = useScroll();
+  const [visible, setVisible] = useState(true);
+  const [isOpen, setIsOpen] = useState(false); 
+
+  // THIS IS THE LIST OF LINKS
+  const navItems = [
+    { name: "About", link: "/#about" },
+    { name: "Services", link: "/#services" },
+    { name: "Projects", link: "/#projects" },
+    { name: "Education", link: "/#certifications" },
+    { name: "Contact", link: "/#contact" },
+  ];
+
+  useMotionValueEvent(scrollY, "change", (current) => {
+    if (typeof current === "number") {
+      const direction = current - scrollY.getPrevious()!;
+      if (scrollY.get() < 50) {
+        setVisible(true);
+      } else {
+        setVisible(direction < 0);
+      }
+    }
+  });
+
+  return (
+    <>
+      {/* --- MAIN NAVBAR --- */}
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className={cn(
+          "fixed top-6 inset-x-0 mx-auto z-50",
+          "w-[95%] md:w-fit",
+          "border border-white/[0.1] rounded-full",
+          "bg-black/50 backdrop-blur-md",
+          "shadow-lg px-6 py-3 flex items-center justify-between md:gap-6", 
+          "transition-colors duration-300"
+        )}
+      >
+        {/* 1. LOGO / HOME */}
+        <Link href="/" className="flex items-center justify-center p-1">
+          <motion.span
+            whileHover={{
+              scale: 1.1,
+              color: "#ffffff",
+              textShadow: "0px 0px 8px rgb(255,255,255)",
+            }}
+            whileTap={{ scale: 0.95 }}
+            className="text-zinc-400 font-medium text-sm transition-colors cursor-pointer"
+          >
+            Home
+          </motion.span>
+        </Link>
+
+        {/* 2. DESKTOP LINKS (Hidden on Mobile) */}
+        <div className="hidden md:flex items-center gap-6 text-sm font-medium text-zinc-400">
+          {navItems.map((item) => (
+            <Link key={item.name} href={item.link}>
+              <motion.div
+                whileHover={{
+                  scale: 1.1,
+                  color: "#ffffff",
+                  textShadow: "0px 0px 8px rgb(255,255,255)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="cursor-pointer transition-colors"
+              >
+                {item.name}
+              </motion.div>
+            </Link>
+          ))}
+        </div>
+
+        {/* 3. DESKTOP BUTTON (Hidden on Mobile) */}
+        <div className="hidden md:flex items-center">
+          <Link href="https://www.linkedin.com/in/ammar-ahmad24/" target="_blank">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.9 }}
+              className="bg-white text-black px-5 py-2 rounded-full text-xs font-bold transition-all shadow-[0_0_10px_rgba(255,255,255,0.2)] hover:shadow-[0_0_20px_rgba(255,255,255,0.6)]"
+            >
+              Let's Talk
+            </motion.button>
+          </Link>
+        </div>
+
+        {/* 4. MOBILE HAMBURGER BUTTON (Visible ONLY on Mobile) */}
+        <button 
+          onClick={() => setIsOpen(true)} 
+          className="md:hidden text-zinc-300 hover:text-white p-1"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+      </motion.nav>
+
+      {/* --- MOBILE FULLSCREEN OVERLAY (This creates the Vertical Menu) --- */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "tween", duration: 0.3 }}
+            className="fixed inset-0 z-[60] bg-[#0a0a0a] flex flex-col items-center justify-center"
+          >
+            {/* CLOSE BUTTON */}
+            <button
+              onClick={() => setIsOpen(false)}
+              className="absolute top-8 right-8 text-zinc-400 hover:text-white p-2 border border-white/10 rounded-full"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* VERTICAL LINKS LOOP (Fixed Variable Name Here) */}
+            <div className="flex flex-col items-center gap-8">
+            {navItems.map((item, i) => (
+  <Link key={item.name} href={item.link} onClick={() => setIsOpen(false)}>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.1 + i * 0.1 }}
+      // --- NEW STYLE: Clean White, Bold, turns Blue on hover ---
+      className="text-4xl font-bold text-white hover:text-blue-500 transition-colors duration-300 cursor-pointer py-4"
+    >
+      {item.name}
+    </motion.div>
+  </Link>
+))}
+
+              {/* Mobile CTA */}
+              <Link href="https://www.linkedin.com/in/ammar-ahmad24/" target="_blank" onClick={() => setIsOpen(false)}>
+                  <motion.button
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 }}
+                    className="mt-6 px-10 py-4 rounded-full bg-white text-black text-xl font-bold"
+                  >
+                    Let's Talk
+                  </motion.button>
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+export default Navbar;

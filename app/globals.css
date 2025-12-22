@@ -1,26 +1,65 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* --- GLOBAL SETTINGS --- */
+html {
+  scroll-behavior: smooth; /* Enables smooth scrolling for anchor links */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Optional: Makes the scrollbar look dark and premium */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* --- PERFORMANCE OPTIMIZATIONS --- */
+
+/* 1. Force GPU for generic motion elements to prevent jitter */
+.framer-motion-div {
+  will-change: opacity, transform;
+  transform: translateZ(0); 
 }
 
+/* 2. Disable heavy text anti-aliasing during scroll for speed */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  text-rendering: optimizeSpeed;
+}
+
+/* --- SECURITY & UI UX (Your Custom Requests) --- */
+
+/* 1. Disable Text Selection everywhere (Privacy/Anti-Copy) */
+body {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* IE/Edge */
+  user-select: none;         /* Standard */
+}
+
+/* 2. Allow selection ONLY in input fields (CRITICAL: So users can type!) */
+input, textarea {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  cursor: text; /* Adds the text cursor back */
+}
+
+/* 3. Prevent dragging images (Ghost image effect) */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
 }

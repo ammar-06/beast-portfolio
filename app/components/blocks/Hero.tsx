@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { ArrowUpRight, Mail, Download, Linkedin } from 'lucide-react';
-// 1. IMPORT 'Variants' TYPE HERE
 import { motion, Variants } from 'framer-motion'; 
 import Link from 'next/link';
 
@@ -47,7 +46,6 @@ const Hero = () => {
     return () => clearTimeout(timer);
   }, [visibleCount, isDeleting, totalChars]);
 
-  // 2. ADD ': Variants' TYPE DEFINITION HERE
   const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 60 },
     visible: { 
@@ -65,7 +63,8 @@ const Hero = () => {
       
       {/* --- BACKGROUND IMAGE --- */}
       <motion.div 
-        className="absolute top-0 right-0 w-full lg:w-[60%] h-full z-0 pointer-events-none"
+        // 1. CHANGED HERE: Added '-top-24' (Moves up) and 'h-[120%]' (Fixes bottom gap)
+        className="absolute -top-24 right-0 w-full lg:w-[60%] h-[120%] z-0 pointer-events-none"
         initial={{ opacity: 0, x: 50 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 1 }}
@@ -73,7 +72,8 @@ const Hero = () => {
         <img 
           src="/hero-founder.png" 
           alt="Ammar Ahmad" 
-          className="w-full h-full object-cover object-top opacity-40 lg:opacity-100" 
+          // 2. Kept your brightness-175 and opacity-100
+          className="w-full h-full object-cover object-top opacity-100 brightness-175" 
         />
         <div className="absolute inset-0 z-10" style={{ background: `linear-gradient(90deg, ${bgTheme} 0%, ${bgTheme}AA 40%, transparent 100%)` }}></div>
         <div className="absolute bottom-0 w-full h-32 z-10" style={{ background: `linear-gradient(to top, ${bgTheme} 0%, transparent 100%)` }}></div>

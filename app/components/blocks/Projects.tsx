@@ -7,8 +7,23 @@ import { Cpu, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { projectsData } from "@/app/data/projectsData";
 import { SpotlightCard } from "../ui/SpotlightCard"; 
+// 1. IMPORT TILT
+import { Tilt } from 'react-tilt';
 
 const lightAnim = { duration: 0.5, ease: "easeOut" };
+
+// 2. DEFINE TILT OPTIONS
+const defaultTiltOptions = {
+	reverse:        false,  // reverse the tilt direction
+	max:            15,     // max tilt rotation (degrees)
+	perspective:    1000,   // Transform perspective, the lower the more extreme the tilt gets.
+	scale:          1.02,   // 2% Zoom on Hover (Replaces the "Pop Up" y-10)
+	speed:          1000,   // Speed of the enter/exit transition
+	transition:     true,   // Set a transition on enter/exit.
+	axis:           null,   // What axis should be disabled. Can be X or Y.
+	reset:          true,   // If the tilt effect has to be reset on exit.
+	easing:         "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
+};
 
 export const Projects = () => {
   return (
@@ -57,59 +72,61 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.1 }} 
           transition={{ ...lightAnim, delay: index * 0.1 }}
-          // 1. THIS IS THE FIX: Added whileHover to make it POP UP
-          whileHover={{ y: -10, transition: { duration: 0.2 } }}
           className="h-full"
         >
-          <SpotlightCard className="group h-full bg-[#111111] border border-zinc-800 rounded-3xl p-8 overflow-hidden transition-colors duration-300 hover:bg-[#161616] hover:border-zinc-600">
-            
-            {/* The Gradient Blob */}
-            <div className={cn(
-                "absolute -right-20 -top-20 w-64 h-64 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition duration-700 bg-gradient-to-br",
-                project.gradient
-            )}></div>
+          {/* 3. WRAP WITH TILT COMPONENT */}
+          {/* We added className="h-full" to Tilt to ensure layout stays correct */}
+          <Tilt options={defaultTiltOptions} className="h-full">
+            <SpotlightCard className="group h-full bg-[#111111] border border-zinc-800 rounded-3xl p-8 overflow-hidden transition-colors duration-300 hover:bg-[#161616] hover:border-zinc-600">
+                
+                {/* The Gradient Blob */}
+                <div className={cn(
+                    "absolute -right-20 -top-20 w-64 h-64 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition duration-700 bg-gradient-to-br",
+                    project.gradient
+                )}></div>
 
-            {/* The Rotating Icon */}
-            <div className="absolute -right-6 -bottom-6 opacity-5 group-hover:opacity-10 transition-all duration-500 transform group-hover:scale-110 rotate-12 text-white">
-                <Icon className="w-24 h-24" />
-            </div>
+                {/* The Rotating Icon */}
+                <div className="absolute -right-6 -bottom-6 opacity-5 group-hover:opacity-10 transition-all duration-500 transform group-hover:scale-110 rotate-12 text-white">
+                    <Icon className="w-24 h-24" />
+                </div>
 
-            <div className="relative z-10 flex flex-col h-full">
-                <div className="mb-6">
-                    <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center gap-3">
-                            <div className="p-2 rounded-lg bg-white/5 border border-white/10">
-                                <Cpu className="w-5 h-5 text-zinc-300" />
+                <div className="relative z-10 flex flex-col h-full">
+                    <div className="mb-6">
+                        <div className="flex items-center justify-between mb-3">
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 rounded-lg bg-white/5 border border-white/10">
+                                    <Cpu className="w-5 h-5 text-zinc-300" />
+                                </div>
+                                <span className={cn("text-sm font-bold uppercase tracking-wider bg-clip-text text-transparent bg-gradient-to-r", project.textGradient)}>
+                                    {project.tagline}
+                                </span>
                             </div>
-                            <span className={cn("text-sm font-bold uppercase tracking-wider bg-clip-text text-transparent bg-gradient-to-r", project.textGradient)}>
-                                {project.tagline}
-                            </span>
+                            <ArrowUpRight className="text-zinc-600 group-hover:text-white transition-colors" />
                         </div>
-                        <ArrowUpRight className="text-zinc-600 group-hover:text-white transition-colors" />
+                        <h3 className="text-3xl font-bold text-white group-hover:text-zinc-100 transition-colors">
+                            {project.title}
+                        </h3>
                     </div>
-                    <h3 className="text-3xl font-bold text-white group-hover:text-zinc-100 transition-colors">
-                        {project.title}
-                    </h3>
-                </div>
 
-                <p className="text-zinc-400 text-base leading-relaxed mb-8 flex-grow">
-                    {project.summary}
-                </p>
+                    <p className="text-zinc-400 text-base leading-relaxed mb-8 flex-grow">
+                        {project.summary}
+                    </p>
 
-                <div className="flex flex-wrap gap-2 mt-auto">
-                    {project.stack.slice(0, 3).map((tech: string, i: number) => (
-                        <span key={i} className="px-3 py-1.5 text-xs font-medium text-zinc-300 bg-zinc-950 border border-zinc-800 rounded-md">
-                            {tech}
-                        </span>
-                    ))}
-                    {project.stack.length > 3 && (
-                        <span className="px-3 py-1.5 text-xs font-medium text-zinc-500 bg-zinc-950 border border-zinc-900 rounded-md">
-                           +{project.stack.length - 3} more
-                        </span>
-                    )}
+                    <div className="flex flex-wrap gap-2 mt-auto">
+                        {project.stack.slice(0, 3).map((tech: string, i: number) => (
+                            <span key={i} className="px-3 py-1.5 text-xs font-medium text-zinc-300 bg-zinc-950 border border-zinc-800 rounded-md">
+                                {tech}
+                            </span>
+                        ))}
+                        {project.stack.length > 3 && (
+                            <span className="px-3 py-1.5 text-xs font-medium text-zinc-500 bg-zinc-950 border border-zinc-900 rounded-md">
+                            +{project.stack.length - 3} more
+                            </span>
+                        )}
+                    </div>
                 </div>
-            </div>
-          </SpotlightCard>
+            </SpotlightCard>
+          </Tilt>
         </motion.div>
     </Link>
   );

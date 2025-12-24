@@ -63,7 +63,6 @@ const Hero = () => {
       
       {/* --- BACKGROUND IMAGE --- */}
       <motion.div 
-        // 1. CHANGED HERE: Added '-top-24' (Moves up) and 'h-[120%]' (Fixes bottom gap)
         className="absolute -top-24 right-0 w-full lg:w-[60%] h-[120%] z-0 pointer-events-none"
         initial={{ opacity: 0, x: 50 }}
         whileInView={{ opacity: 1, x: 0 }}
@@ -72,15 +71,18 @@ const Hero = () => {
         <img 
           src="/hero-founder.png" 
           alt="Ammar Ahmad" 
-          // 2. Kept your brightness-175 and opacity-100
-          className="w-full h-full object-cover object-top opacity-100 brightness-175" 
+          className="w-full h-full object-cover object-top opacity-100 brightness-140" 
         />
         <div className="absolute inset-0 z-10" style={{ background: `linear-gradient(90deg, ${bgTheme} 0%, ${bgTheme}AA 40%, transparent 100%)` }}></div>
         <div className="absolute bottom-0 w-full h-32 z-10" style={{ background: `linear-gradient(to top, ${bgTheme} 0%, transparent 100%)` }}></div>
       </motion.div>
 
       {/* --- TEXT CONTENT --- */}
-      <div className="relative z-20 w-full h-full flex flex-col justify-start pt-32 md:pt-32 lg:pt-40 pl-6 md:pl-16 lg:pl-20 pr-6">
+      {/* FIX IS BELOW:
+         - changed 'pt-32' to 'pt-72' (This pushes text down on Mobile)
+         - kept 'md:pt-32' (This puts it back up on Laptop/PC)
+      */}
+      <div className="relative z-20 w-full h-full flex flex-col justify-start pt-60 md:pt-32 lg:pt-40 pl-6 md:pl-16 lg:pl-20 pr-6">
         
         <div className="max-w-4xl">
             

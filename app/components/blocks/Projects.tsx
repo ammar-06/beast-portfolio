@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Cpu, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { projectsData } from "@/app/data/projectsData";
+import { SpotlightCard } from "../ui/SpotlightCard"; 
 
 const lightAnim = { duration: 0.5, ease: "easeOut" };
 
@@ -56,16 +57,19 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.1 }} 
           transition={{ ...lightAnim, delay: index * 0.1 }}
-          className="group relative h-full"
+          // 1. THIS IS THE FIX: Added whileHover to make it POP UP
+          whileHover={{ y: -10, transition: { duration: 0.2 } }}
+          className="h-full"
         >
-          {/* OPTIMIZATION: Solid BG instead of blur */}
-          <div className="relative h-full bg-[#111111] border border-zinc-800 rounded-3xl p-8 overflow-hidden transition-colors duration-300 hover:bg-[#161616] hover:border-zinc-600">
+          <SpotlightCard className="group h-full bg-[#111111] border border-zinc-800 rounded-3xl p-8 overflow-hidden transition-colors duration-300 hover:bg-[#161616] hover:border-zinc-600">
             
+            {/* The Gradient Blob */}
             <div className={cn(
                 "absolute -right-20 -top-20 w-64 h-64 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition duration-700 bg-gradient-to-br",
                 project.gradient
             )}></div>
 
+            {/* The Rotating Icon */}
             <div className="absolute -right-6 -bottom-6 opacity-5 group-hover:opacity-10 transition-all duration-500 transform group-hover:scale-110 rotate-12 text-white">
                 <Icon className="w-24 h-24" />
             </div>
@@ -105,7 +109,7 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
                     )}
                 </div>
             </div>
-          </div>
+          </SpotlightCard>
         </motion.div>
     </Link>
   );

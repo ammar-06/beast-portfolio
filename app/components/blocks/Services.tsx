@@ -3,6 +3,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Bot, Workflow, Database } from "lucide-react";
+// 1. Import the SpotlightCard (Adjust path if your folder structure is different)
+import { SpotlightCard } from "../ui/SpotlightCard"; 
 
 // PERFORMANCE FIX: Use simple easing instead of heavy springs
 const lightAnim = {
@@ -75,37 +77,38 @@ const Services = () => {
                 viewport={{ once: false, margin: "-50px" }}
                 transition={{ ...lightAnim, delay: idx * 0.1 }}
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                // OPTIMIZATION: Replaced backdrop-blur with solid bg-[#111]
-                className="group relative p-8 rounded-3xl bg-[#111111] border border-zinc-800 hover:bg-[#151515] hover:border-blue-500/30 transition-colors"
+                // NOTE: We removed the styling classes from here and moved them inside SpotlightCard
+                className="h-full" 
               >
-                {/* Glow Effect (Simplified) */}
-                <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
-                
-                <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-2xl bg-zinc-950 border border-zinc-800 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:border-blue-500/50 transition-transform duration-300">
-                    <Icon className="w-7 h-7 text-white group-hover:text-blue-400 transition-colors" />
-                  </div>
+                {/* 2. WRAP CONTENT WITH SPOTLIGHT CARD */}
+                <SpotlightCard className="p-8 h-full rounded-3xl bg-[#111111] border border-zinc-800 hover:border-zinc-700 transition-colors">
+                    
+                    <div className="relative z-10">
+                      <div className="w-14 h-14 rounded-2xl bg-zinc-950 border border-zinc-800 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:border-blue-500/50 transition-transform duration-300">
+                        <Icon className="w-7 h-7 text-white group-hover:text-blue-400 transition-colors" />
+                      </div>
 
-                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-100 transition-colors">
-                    {service.title}
-                  </h3>
+                      <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-100 transition-colors">
+                        {service.title}
+                      </h3>
 
-                  <p className="text-zinc-400 leading-relaxed mb-8 text-sm">
-                    {service.description}
-                  </p>
+                      <p className="text-zinc-400 leading-relaxed mb-8 text-sm">
+                        {service.description}
+                      </p>
 
-                  <div className="flex flex-wrap gap-2">
-                    {service.tags.map((tag, tIdx) => (
-                      <span 
-                        key={tIdx} 
-                        className="px-3 py-1 text-xs font-medium text-blue-200 bg-blue-900/10 border border-blue-900/20 rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                      <div className="flex flex-wrap gap-2">
+                        {service.tags.map((tag, tIdx) => (
+                          <span 
+                            key={tIdx} 
+                            className="px-3 py-1 text-xs font-medium text-blue-200 bg-blue-900/10 border border-blue-900/20 rounded-full"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
 
-                </div>
+                </SpotlightCard>
               </motion.div>
             );
           })}

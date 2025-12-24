@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import ProgressBar from "./components/ui/ProgressBar";
 
 // IMPORTANT: Ensure this path matches where you created the Navbar.
 // If you put it in 'shared', change 'ui' to 'shared'.
@@ -25,6 +26,7 @@ export default function RootLayout({
         {/* The Navbar sits here, above all page content */}
         <Navbar />
         <ScrollFix />
+        <ProgressBar />
         {children}
       </body>
     </html>

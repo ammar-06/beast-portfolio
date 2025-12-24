@@ -4,6 +4,7 @@ import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react"; 
+import { ScrambleText } from "../ui/ScrambleText";
 
 const Navbar = () => {
   const { scrollY } = useScroll();
@@ -48,34 +49,22 @@ const Navbar = () => {
       >
         {/* 1. LOGO / HOME */}
         <Link href="/" className="flex items-center justify-center p-1">
-          <motion.span
-            whileHover={{
-              scale: 1.1,
-              color: "#ffffff",
-              textShadow: "0px 0px 8px rgb(255,255,255)",
-            }}
-            whileTap={{ scale: 0.95 }}
-            className="text-zinc-400 font-medium text-sm transition-colors cursor-pointer"
-          >
-            Home
-          </motion.span>
+          {/* UPDATED: Changed text-sm to text-base */}
+          <ScrambleText 
+            text="Home" 
+            className="text-zinc-400 font-medium text-base hover:text-white transition-colors cursor-pointer" 
+          />
         </Link>
 
-        {/* 2. DESKTOP LINKS (Hidden on Mobile) */}
-        <div className="hidden md:flex items-center gap-6 text-sm font-medium text-zinc-400">
+        {/* 2. DESKTOP LINKS */}
+        {/* UPDATED: Changed text-sm to text-base */}
+        <div className="hidden md:flex items-center gap-6 text-base font-medium text-zinc-400">
           {navItems.map((item) => (
             <Link key={item.name} href={item.link}>
-              <motion.div
-                whileHover={{
-                  scale: 1.1,
-                  color: "#ffffff",
-                  textShadow: "0px 0px 8px rgb(255,255,255)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                className="cursor-pointer transition-colors"
-              >
-                {item.name}
-              </motion.div>
+              <ScrambleText 
+                text={item.name} 
+                className="hover:text-white transition-colors py-1"
+              />
             </Link>
           ))}
         </div>
@@ -102,7 +91,7 @@ const Navbar = () => {
         </button>
       </motion.nav>
 
-      {/* --- MOBILE FULLSCREEN OVERLAY (This creates the Vertical Menu) --- */}
+      {/* --- MOBILE FULLSCREEN OVERLAY --- */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -120,21 +109,20 @@ const Navbar = () => {
               <X className="w-6 h-6" />
             </button>
 
-            {/* VERTICAL LINKS LOOP (Fixed Variable Name Here) */}
+            {/* VERTICAL LINKS LOOP */}
             <div className="flex flex-col items-center gap-8">
             {navItems.map((item, i) => (
-  <Link key={item.name} href={item.link} onClick={() => setIsOpen(false)}>
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.1 + i * 0.1 }}
-      // --- NEW STYLE: Clean White, Bold, turns Blue on hover ---
-      className="text-4xl font-bold text-white hover:text-blue-500 transition-colors duration-300 cursor-pointer py-4"
-    >
-      {item.name}
-    </motion.div>
-  </Link>
-))}
+              <Link key={item.name} href={item.link} onClick={() => setIsOpen(false)}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 + i * 0.1 }}
+                  className="text-4xl font-bold text-white hover:text-blue-500 transition-colors duration-300 cursor-pointer py-4"
+                >
+                  {item.name}
+                </motion.div>
+              </Link>
+            ))}
 
               {/* Mobile CTA */}
               <Link href="https://www.linkedin.com/in/ammar-ahmad24/" target="_blank" onClick={() => setIsOpen(false)}>

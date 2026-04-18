@@ -158,7 +158,7 @@ const Hero = () => {
               <div className={`${btnBaseClass} border border-zinc-700 bg-zinc-900/50`}>
                   <div className="absolute inset-0 bg-zinc-800 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out z-0 pointer-events-none"></div>
                   <div className="relative z-10 flex items-center gap-6">
-                    <Link href="https://www.linkedin.com/in/ammar-ahmad24/" target="_blank" className="text-zinc-400 hover:text-[#0077b5] hover:scale-110 transition-all duration-300">
+                    <Link href="https://www.linkedin.com/in/ammar-ahmad2408/" target="_blank" className="text-zinc-400 hover:text-[#0077b5] hover:scale-110 transition-all duration-300">
                       <Linkedin className="w-6 h-6" />
                     </Link>
                     <div className="w-px h-5 bg-zinc-600 pointer-events-none"></div>

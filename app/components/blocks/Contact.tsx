@@ -192,7 +192,7 @@ export const Contact = () => {
                     Shoot me an Email
                 </a>
                 <a 
-                    href="https://www.linkedin.com/in/ammar-ahmad24/" 
+                    href="https://www.linkedin.com/in/ammar-ahmad2408/" 
                     target="_blank" 
                     className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-white border border-zinc-700 bg-zinc-900/50 hover:bg-blue-500/10 hover:border-blue-500/50 hover:text-blue-400 transition-all duration-300 group text-sm"
                 >
@@ -214,7 +214,7 @@ export const Contact = () => {
                 </a>
 
                 {/* LINKEDIN */}
-                <a href="https://www.linkedin.com/in/ammar-ahmad24/" target="_blank" className="hover:text-blue-400 transition-colors" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/ammar-ahmad2408/" target="_blank" className="hover:text-blue-400 transition-colors" aria-label="LinkedIn">
                     <Linkedin className="w-5 h-5" />
                 </a>
 

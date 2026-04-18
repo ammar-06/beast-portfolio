@@ -125,7 +125,7 @@ const Navbar = () => {
             ))}
 
               {/* Mobile CTA */}
-              <Link href="https://www.linkedin.com/in/ammar-ahmad24/" target="_blank" onClick={() => setIsOpen(false)}>
+              <Link href="https://www.linkedin.com/in/ammar-ahmad2408/" target="_blank" onClick={() => setIsOpen(false)}>
                   <motion.button
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

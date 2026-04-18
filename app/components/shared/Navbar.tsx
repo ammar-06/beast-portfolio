@@ -71,7 +71,7 @@ const Navbar = () => {
 
         {/* 3. DESKTOP BUTTON (Hidden on Mobile) */}
         <div className="hidden md:flex items-center">
-          <Link href="https://www.linkedin.com/in/ammar-ahmad24/" target="_blank">
+          <Link href="https://www.linkedin.com/in/ammar-ahmad2408/" target="_blank">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.9 }}

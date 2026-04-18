@@ -13,11 +13,15 @@ import {
   MessageSquare, 
   Workflow, 
   AppWindow, 
-  Search 
+  Search,
+  Link,      // Added for LangChain
+  Network    // Added for LangGraph
 } from "lucide-react";
 
 // --- SKILLS LIST ---
 const skills = [
+  { name: "LangChain", icon: <Link className="w-5 h-5" />, color: "text-emerald-400" },   // New addition
+  { name: "LangGraph", icon: <Network className="w-5 h-5" />, color: "text-rose-400" }, // New addition
   { name: "n8n Orchestration", icon: <Layers className="w-5 h-5" />, color: "text-red-400" },
   { name: "Multi-Agent Systems", icon: <Cpu className="w-5 h-5" />, color: "text-blue-400" },
   { name: "Agentic Workflows", icon: <Workflow className="w-5 h-5" />, color: "text-purple-400" },

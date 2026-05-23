@@ -20,7 +20,7 @@ export const MotionBackground = () => {
           value: "#050505", // Deep dark background
         },
       },
-      fpsLimit: 120,
+      fpsLimit: 60,
       interactivity: {
         events: {
           onClick: {
@@ -48,9 +48,9 @@ export const MotionBackground = () => {
         },
         links: {
           color: "#3b82f6", // Tailwind blue-500
-          distance: 150,
+          distance: 120,
           enable: true,
-          opacity: 0.3,
+          opacity: 0.1,
           width: 1,
         },
         move: {
@@ -67,7 +67,7 @@ export const MotionBackground = () => {
           density: {
             enable: true,
           },
-          value: 100, 
+          value: 30, 
         },
         opacity: {
           value: 0.5,

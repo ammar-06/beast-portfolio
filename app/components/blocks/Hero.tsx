@@ -15,21 +15,8 @@ const UpworkIcon = ({ className }: { className?: string }) => (
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-
   const handleVideoEnd = () => {
-    setIsPlaying(false);
-  };
-
-  const togglePlay = () => {
-    if (videoRef.current) {
-      if (videoRef.current.paused) {
-        videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
-      } else {
-        videoRef.current.pause();
-        setIsPlaying(false);
-      }
-    }
+    // Optional: handle video end
   };
 
   // Scroll animations
@@ -114,6 +101,7 @@ const Hero = () => {
               className="w-full h-full object-cover"
               playsInline
               preload="auto"
+              controls
               onEnded={handleVideoEnd}
             >
               <source src="/hero-video.mp4" type="video/mp4" />
@@ -122,19 +110,6 @@ const Hero = () => {
 
             {/* Dark overlay for contrast */}
             <div className="absolute inset-0 bg-black/20 md:bg-black/40 pointer-events-none"></div>
-
-            {/* Play Button Overlay */}
-            <AnimatePresence>
-              {!isPlaying && (
-                <button
-                  onClick={togglePlay}
-                  onTouchEnd={togglePlay}
-                  className="absolute inset-0 m-auto w-24 h-24 md:w-32 md:h-32 bg-black/40 hover:bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center z-40 transition-all border border-white/20 group cursor-pointer"
-                >
-                  <Play className="w-10 h-10 md:w-12 md:h-12 text-white/90 ml-2 group-hover:scale-110 transition-transform" />
-                </button>
-              )}
-            </AnimatePresence>
 
             {/* Video overlay text */}
             <div className="absolute bottom-12 md:bottom-auto md:top-1/2 md:-translate-y-1/2 left-6 md:left-16 lg:left-24 z-20 pointer-events-none">

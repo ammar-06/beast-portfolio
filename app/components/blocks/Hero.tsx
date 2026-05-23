@@ -15,13 +15,17 @@ const UpworkIcon = ({ className }: { className?: string }) => (
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   const handleVideoEnd = () => {
     setIsPlaying(false);
   };
 
-  const togglePlay = () => {
+  const togglePlay = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     if (videoRef.current) {
       if (isPlaying) {
         videoRef.current.pause();
@@ -60,6 +64,19 @@ const Hero = () => {
   
   const [visibleCount, setVisibleCount] = useState(1); 
   const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    // Attempt to autoplay with sound on mount
+    if (videoRef.current) {
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // If browser blocks autoplay with sound, show our custom play button
+          setIsPlaying(false);
+        });
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const typeSpeed = 150;
@@ -111,8 +128,6 @@ const Hero = () => {
               ref={videoRef}
               className="w-full h-full object-cover"
               playsInline
-              autoPlay
-              muted
               onEnded={handleVideoEnd}
             >
               <source src="/hero-video.mp4" type="video/mp4" />

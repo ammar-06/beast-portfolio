@@ -21,11 +21,7 @@ const Hero = () => {
     setIsPlaying(false);
   };
 
-  const togglePlay = (e?: any) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
+  const togglePlay = () => {
     if (videoRef.current) {
       if (isPlaying) {
         videoRef.current.pause();
@@ -135,7 +131,7 @@ const Hero = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
                   onClick={togglePlay}
-                  onTouchStart={togglePlay}
+                  onTouchEnd={togglePlay}
                   className="absolute inset-0 m-auto w-24 h-24 md:w-32 md:h-32 bg-black/40 hover:bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center z-40 transition-all border border-white/20 group cursor-pointer"
                 >
                   <Play className="w-10 h-10 md:w-12 md:h-12 text-white/90 ml-2 group-hover:scale-110 transition-transform" />
@@ -160,34 +156,7 @@ const Hero = () => {
           className="absolute inset-0 z-20 flex flex-col md:flex-row items-center justify-between pointer-events-none"
           style={{ opacity: textOpacity }}
         >
-          {/* Background image styling from their original code */}
-          <motion.div 
-            className="absolute -top-24 right-0 w-[80%] md:w-[60%] h-[120%] z-0 pointer-events-none"
-            style={{ 
-              x: photoX, 
-              opacity: photoOpacity,
-              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 25%, black 100%)',
-              maskImage: 'linear-gradient(to right, transparent 0%, black 25%, black 100%)'
-            }}
-          >
-            {/* Desktop Video */}
-            <video 
-              src="/hero-founder.mp4" 
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="hidden md:block w-full h-full object-cover object-top opacity-100 brightness-75" 
-            />
-            {/* Mobile Image */}
-            <img 
-              src="/hero-founder-mobile.png" 
-              alt="Ammar Ahmad" 
-              className="block md:hidden w-full h-full object-cover object-top opacity-100 brightness-75" 
-            />
-            {/* Bottom fade only, side fade is handled by the maskImage above */}
-            <div className="absolute bottom-0 w-full h-32 z-10 bg-gradient-to-t from-[#0a0a0a] to-transparent"></div>
-          </motion.div>
+          {/* Removed the laggy founder video/image overlay here so only the 3D particles show through */}
 
           <motion.div 
             className="relative z-20 w-full h-full flex flex-col justify-center pl-6 md:pl-16 lg:pl-20 pr-6"

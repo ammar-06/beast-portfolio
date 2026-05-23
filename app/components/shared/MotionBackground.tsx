@@ -49,7 +49,7 @@ export const MotionBackground = () => {
         links: {
           color: "#3b82f6", // Tailwind blue-500
           distance: 120,
-          enable: true,
+          enable: false,
           opacity: 0.1,
           width: 1,
         },

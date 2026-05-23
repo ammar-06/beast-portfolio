@@ -53,7 +53,7 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="relative w-full py-16 md:py-24 px-6 md:px-12 overflow-hidden bg-[#0a0a0a]">
+    <section id="contact" className="relative w-full py-16 md:py-24 px-6 md:px-12 overflow-hidden bg-transparent">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent"></div>
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[120px] pointer-events-none" />
 
@@ -84,7 +84,7 @@ export const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="bg-[#111111] border border-zinc-800 rounded-3xl p-8 shadow-2xl relative overflow-hidden group hover:border-zinc-700 transition-colors duration-500"
+            className="bg-[#111111]/60 backdrop-blur-md border border-zinc-800 rounded-3xl p-8 shadow-2xl relative overflow-hidden group hover:border-zinc-700 transition-colors duration-500"
         >
             {isSuccess ? (
               <motion.div 
@@ -116,6 +116,7 @@ export const Contact = () => {
                           <input 
                               type="text" 
                               name="name"
+                              placeholder="Full Name"
                               value={formData.name}
                               onChange={handleChange}
                               required
@@ -131,6 +132,7 @@ export const Contact = () => {
                           <input 
                               type="email" 
                               name="email"
+                              placeholder="Email Address"
                               value={formData.email}
                               onChange={handleChange}
                               required
@@ -179,7 +181,7 @@ export const Contact = () => {
 
             <div className="relative my-8 text-center">
                 <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-zinc-800"></div></div>
-                <div className="relative flex justify-center text-[10px] uppercase tracking-widest font-bold"><span className="bg-[#111111] px-4 text-zinc-600">Or connect via social</span></div>
+                <div className="relative flex justify-center text-[10px] uppercase tracking-widest font-bold"><span className="bg-[#050505] px-4 text-zinc-600">Or connect via social</span></div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -194,6 +196,7 @@ export const Contact = () => {
                 <a 
                     href="https://www.linkedin.com/in/ammar-ahmad2408/" 
                     target="_blank" 
+                    rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-white border border-zinc-700 bg-zinc-900/50 hover:bg-blue-500/10 hover:border-blue-500/50 hover:text-blue-400 transition-all duration-300 group text-sm"
                 >
                     <Linkedin className="w-4 h-4 text-zinc-400 group-hover:text-blue-400 transition-colors" />
@@ -209,17 +212,17 @@ export const Contact = () => {
             <div className="flex items-center gap-6">
                 
                 {/* UPWORK (Replaced GitHub) */}
-                <a href="https://www.upwork.com/freelancers/~0196c931ce0a2a9851" target="_blank" className="hover:text-[#14a800] transition-colors" aria-label="Upwork">
+                <a href="https://www.upwork.com/freelancers/~0196c931ce0a2a9851" target="_blank" rel="noopener noreferrer" className="hover:text-[#14a800] transition-colors" aria-label="Upwork">
                     <UpworkIcon className="w-6 h-6" />
                 </a>
 
                 {/* LINKEDIN */}
-                <a href="https://www.linkedin.com/in/ammar-ahmad2408/" target="_blank" className="hover:text-blue-400 transition-colors" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/ammar-ahmad2408/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors" aria-label="LinkedIn">
                     <Linkedin className="w-5 h-5" />
                 </a>
 
                 {/* EMAIL (Fixed Link) */}
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ammarofficial321@gmail.com" target="_blank" className="hover:text-white transition-colors" aria-label="Email">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ammarofficial321@gmail.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Email">
                     <Mail className="w-5 h-5" />
                 </a>
 

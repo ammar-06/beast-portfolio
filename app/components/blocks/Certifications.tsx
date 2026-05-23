@@ -15,7 +15,7 @@ const lightAnim = {
 
 const Certifications = () => {
   return (
-    <section id="certifications" className="pt-40 pb-24 bg-[#0a0a0a] relative overflow-hidden">
+    <section id="certifications" className="pt-40 pb-24 bg-transparent relative overflow-hidden">
       
       {/* SEPARATOR LINE */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent"></div>
@@ -103,7 +103,7 @@ const Certifications = () => {
                             transition={{ ...lightAnim, delay: idx * 0.1 }}
                             whileHover={{ y: -5 }}
                             // OPTIMIZATION: Solid BG
-                            className="bg-[#111111] border border-zinc-800 rounded-xl p-4 h-full hover:border-blue-500/50 hover:bg-[#151515] transition-colors cursor-pointer flex flex-col"
+                            className="bg-[#111111]/60 backdrop-blur-md border border-zinc-800 rounded-xl p-4 h-full hover:border-blue-500/50 hover:bg-[#151515]/80 transition-colors cursor-pointer flex flex-col"
                         >
                             <div className="relative w-full h-32 mb-3 rounded-lg overflow-hidden bg-zinc-950 border border-zinc-800/50">
                                 <Image 

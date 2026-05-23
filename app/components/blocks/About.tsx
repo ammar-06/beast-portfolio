@@ -38,7 +38,7 @@ const skills = [
 
 export const About = () => {
   return (
-    <section id="about" className="relative w-full py-24 overflow-hidden bg-[#0a0a0a]">
+    <section id="about" className="relative w-full py-24 overflow-hidden bg-transparent">
       
       {/* Background Glow */}
       <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] bg-blue-900/10 blur-[120px] rounded-full pointer-events-none"></div>

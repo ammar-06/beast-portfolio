@@ -27,7 +27,7 @@ const defaultTiltOptions = {
 
 export const Projects = () => {
   return (
-    <section id="projects" className="py-20 md:py-32 bg-[#0a0a0a] relative z-20 overflow-hidden">
+    <section id="projects" className="py-20 md:py-32 bg-transparent relative z-20 overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent"></div>
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
@@ -77,7 +77,7 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
           {/* 3. WRAP WITH TILT COMPONENT */}
           {/* We added className="h-full" to Tilt to ensure layout stays correct */}
           <Tilt options={defaultTiltOptions} className="h-full">
-            <SpotlightCard className="group h-full bg-[#111111] border border-zinc-800 rounded-3xl p-8 overflow-hidden transition-colors duration-300 hover:bg-[#161616] hover:border-zinc-600">
+            <SpotlightCard className="group h-full bg-[#111111]/60 backdrop-blur-md border border-zinc-800 rounded-3xl p-8 overflow-hidden transition-colors duration-300 hover:bg-[#161616]/80 hover:border-zinc-600">
                 
                 {/* The Gradient Blob */}
                 <div className={cn(

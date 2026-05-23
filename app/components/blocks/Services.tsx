@@ -35,7 +35,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="py-32 bg-[#0a0a0a] relative overflow-hidden">
+    <section id="services" className="py-32 bg-transparent relative overflow-hidden">
       
       {/* Separator Line */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent"></div>
@@ -81,7 +81,7 @@ const Services = () => {
                 className="h-full" 
               >
                 {/* 2. WRAP CONTENT WITH SPOTLIGHT CARD */}
-                <SpotlightCard className="p-8 h-full rounded-3xl bg-[#111111] border border-zinc-800 hover:border-zinc-700 transition-colors">
+                <SpotlightCard className="p-8 h-full rounded-3xl bg-[#111111]/60 backdrop-blur-md border border-zinc-800 hover:border-zinc-700 transition-colors">
                     
                     <div className="relative z-10">
                       <div className="w-14 h-14 rounded-2xl bg-zinc-950 border border-zinc-800 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:border-blue-500/50 transition-transform duration-300">

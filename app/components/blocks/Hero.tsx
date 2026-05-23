@@ -116,7 +116,7 @@ const Hero = () => {
         {/* --- INITIAL VIEW: VIDEO --- */}
         <motion.div
           className={isMobile ? "relative w-full h-[100dvh] z-10" : "absolute inset-0 z-10"}
-          style={isMobile ? {} : { opacity: videoOpacity, willChange: "opacity" }}
+          style={{ opacity: isMobile ? 1 : videoOpacity, willChange: "opacity" }}
         >
           {/* Video Container */}
           <div className="relative w-full h-full overflow-hidden">
@@ -161,7 +161,7 @@ const Hero = () => {
         {/* --- SCROLLED VIEW: THE USER'S OLD CODE IMPLEMENTATION --- */}
         <motion.div
           className={isMobile ? "relative w-full min-h-[100dvh] z-20 flex flex-col justify-center px-6 py-20" : "absolute inset-0 z-20 flex flex-col md:flex-row items-center justify-between pointer-events-none"}
-          style={isMobile ? {} : { opacity: textOpacity }}
+          style={{ opacity: isMobile ? 1 : textOpacity }}
         >
           {/* Background image styling from their original code */}
           <motion.div 
@@ -188,7 +188,7 @@ const Hero = () => {
 
           <motion.div 
             className={isMobile ? "relative z-20 w-full h-full flex flex-col justify-center" : "relative z-20 w-full h-full flex flex-col justify-center pl-6 md:pl-16 lg:pl-20 pr-6"}
-            style={isMobile ? {} : { x: textX, scale: textScale }}
+            style={isMobile ? { x: 0, scale: 1 } : { x: textX, scale: textScale }}
           >
             <div className="max-w-4xl pointer-events-auto">
                 {/* --- NAME & TYPING EFFECT --- */}

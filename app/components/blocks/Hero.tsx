@@ -153,7 +153,28 @@ const Hero = () => {
           className="absolute inset-0 z-20 flex flex-col md:flex-row items-center justify-between pointer-events-none"
           style={{ opacity: textOpacity }}
         >
-          {/* Removed the laggy founder video/image overlay here so only the 3D particles show through */}
+          {/* Background image styling from their original code */}
+          <motion.div 
+            className="absolute -top-24 right-0 w-[80%] md:w-[60%] h-[120%] z-0 pointer-events-none hidden md:block"
+            style={{ 
+              x: photoX, 
+              opacity: photoOpacity,
+              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 25%, black 100%)',
+              maskImage: 'linear-gradient(to right, transparent 0%, black 25%, black 100%)'
+            }}
+          >
+            {/* Desktop Video */}
+            <video 
+              src="/hero-founder.mp4" 
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover object-top opacity-100 brightness-75" 
+            />
+            {/* Bottom fade only, side fade is handled by the maskImage above */}
+            <div className="absolute bottom-0 w-full h-32 z-10 bg-gradient-to-t from-[#0a0a0a] to-transparent"></div>
+          </motion.div>
 
           <motion.div 
             className="relative z-20 w-full h-full flex flex-col justify-center pl-6 md:pl-16 lg:pl-20 pr-6"

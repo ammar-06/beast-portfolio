@@ -139,6 +139,8 @@ const Hero = () => {
               {!isPlaying && (
                 <button
                   onClick={togglePlay}
+                  aria-label="Play video"
+                  title="Play video"
                   className="absolute inset-0 m-auto w-24 h-24 md:w-32 md:h-32 bg-black/40 hover:bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center z-40 transition-all border border-white/20 group cursor-pointer"
                 >
                   <Play className="w-10 h-10 md:w-12 md:h-12 text-white/90 ml-2 group-hover:scale-110 transition-transform" />

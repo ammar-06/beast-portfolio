@@ -15,13 +15,13 @@ const UpworkIcon = ({ className }: { className?: string }) => (
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const handleVideoEnd = () => {
     setIsPlaying(false);
   };
 
-  const togglePlay = (e?: React.MouseEvent) => {
+  const togglePlay = (e?: any) => {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
@@ -65,18 +65,7 @@ const Hero = () => {
   const [visibleCount, setVisibleCount] = useState(1); 
   const [isDeleting, setIsDeleting] = useState(false);
 
-  useEffect(() => {
-    // Attempt to autoplay with sound on mount
-    if (videoRef.current) {
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // If browser blocks autoplay with sound, show our custom play button
-          setIsPlaying(false);
-        });
-      }
-    }
-  }, []);
+  // Auto-play removed per user request
 
   useEffect(() => {
     const typeSpeed = 150;
@@ -128,6 +117,7 @@ const Hero = () => {
               ref={videoRef}
               className="w-full h-full object-cover"
               playsInline
+              preload="auto"
               onEnded={handleVideoEnd}
             >
               <source src="/hero-video.mp4" type="video/mp4" />
@@ -145,6 +135,7 @@ const Hero = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
                   onClick={togglePlay}
+                  onTouchStart={togglePlay}
                   className="absolute inset-0 m-auto w-24 h-24 md:w-32 md:h-32 bg-black/40 hover:bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center z-40 transition-all border border-white/20 group cursor-pointer"
                 >
                   <Play className="w-10 h-10 md:w-12 md:h-12 text-white/90 ml-2 group-hover:scale-110 transition-transform" />

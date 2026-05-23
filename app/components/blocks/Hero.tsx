@@ -23,12 +23,12 @@ const Hero = () => {
 
   const togglePlay = () => {
     if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
+      if (videoRef.current.paused) {
+        videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
       } else {
-        videoRef.current.play();
+        videoRef.current.pause();
+        setIsPlaying(false);
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
@@ -105,7 +105,7 @@ const Hero = () => {
         {/* --- INITIAL VIEW: VIDEO --- */}
         <motion.div
           className="absolute inset-0 z-10"
-          style={{ scale: videoScale, opacity: videoOpacity, y: videoY }}
+          style={{ opacity: videoOpacity, willChange: "opacity" }}
         >
           {/* Video Container */}
           <div className="relative w-full h-full overflow-hidden">
@@ -126,16 +126,13 @@ const Hero = () => {
             {/* Play Button Overlay */}
             <AnimatePresence>
               {!isPlaying && (
-                <motion.button
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
+                <button
                   onClick={togglePlay}
                   onTouchEnd={togglePlay}
                   className="absolute inset-0 m-auto w-24 h-24 md:w-32 md:h-32 bg-black/40 hover:bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center z-40 transition-all border border-white/20 group cursor-pointer"
                 >
                   <Play className="w-10 h-10 md:w-12 md:h-12 text-white/90 ml-2 group-hover:scale-110 transition-transform" />
-                </motion.button>
+                </button>
               )}
             </AnimatePresence>
 

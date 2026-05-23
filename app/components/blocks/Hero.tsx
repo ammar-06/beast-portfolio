@@ -16,6 +16,14 @@ const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize(); // set initial state
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleVideoEnd = () => {
     setIsPlaying(false);
@@ -93,20 +101,22 @@ const Hero = () => {
   const bgTheme = "#0a0a0a"; 
 
   return (
-    <section ref={containerRef} className="relative h-[150vh] bg-black">
+    <section ref={containerRef} className={`relative bg-black ${isMobile ? 'flex flex-col w-full' : 'h-[150vh]'}`}>
       {/* Sticky container holds the layout in viewport while scrolling */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+      <div className={isMobile ? "w-full flex flex-col" : "sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center"}>
 
         {/* Scrolled background: Dark elegant background from user's old code */}
-        <motion.div 
-          className="absolute inset-0 z-0"
-          style={{ opacity: bgOpacity, backgroundColor: bgTheme }}
-        />
+        {!isMobile && (
+          <motion.div 
+            className="absolute inset-0 z-0"
+            style={{ opacity: bgOpacity, backgroundColor: bgTheme }}
+          />
+        )}
 
         {/* --- INITIAL VIEW: VIDEO --- */}
         <motion.div
-          className="absolute inset-0 z-10"
-          style={{ opacity: videoOpacity, willChange: "opacity" }}
+          className={isMobile ? "relative w-full h-[100dvh] z-10" : "absolute inset-0 z-10"}
+          style={isMobile ? {} : { opacity: videoOpacity, willChange: "opacity" }}
         >
           {/* Video Container */}
           <div className="relative w-full h-full overflow-hidden">
@@ -150,8 +160,8 @@ const Hero = () => {
 
         {/* --- SCROLLED VIEW: THE USER'S OLD CODE IMPLEMENTATION --- */}
         <motion.div
-          className="absolute inset-0 z-20 flex flex-col md:flex-row items-center justify-between pointer-events-none"
-          style={{ opacity: textOpacity }}
+          className={isMobile ? "relative w-full min-h-[100dvh] z-20 flex flex-col justify-center px-6 py-20" : "absolute inset-0 z-20 flex flex-col md:flex-row items-center justify-between pointer-events-none"}
+          style={isMobile ? {} : { opacity: textOpacity }}
         >
           {/* Background image styling from their original code */}
           <motion.div 
@@ -177,8 +187,8 @@ const Hero = () => {
           </motion.div>
 
           <motion.div 
-            className="relative z-20 w-full h-full flex flex-col justify-center pl-6 md:pl-16 lg:pl-20 pr-6"
-            style={{ x: textX, scale: textScale }}
+            className={isMobile ? "relative z-20 w-full h-full flex flex-col justify-center" : "relative z-20 w-full h-full flex flex-col justify-center pl-6 md:pl-16 lg:pl-20 pr-6"}
+            style={isMobile ? {} : { x: textX, scale: textScale }}
           >
             <div className="max-w-4xl pointer-events-auto">
                 {/* --- NAME & TYPING EFFECT --- */}

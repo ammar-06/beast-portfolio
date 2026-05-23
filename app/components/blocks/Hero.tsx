@@ -101,7 +101,7 @@ const Hero = () => {
   const bgTheme = "#0a0a0a"; 
 
   return (
-    <section ref={containerRef} className={`relative bg-black ${isMobile ? 'flex flex-col w-full' : 'h-[150vh]'}`}>
+    <section ref={containerRef} className={`relative ${isMobile ? 'bg-transparent flex flex-col w-full' : 'bg-black h-[150vh]'}`}>
       {/* Sticky container holds the layout in viewport while scrolling */}
       <div className={isMobile ? "w-full flex flex-col" : "sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center"}>
 
